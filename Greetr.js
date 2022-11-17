@@ -58,6 +58,23 @@
       this.validate();
       return this;
     },
+
+    htmlGreeting: function (selector, formal) {
+      if (!$) {
+        throw "jQuery not loading";
+      }
+      if (!selector) {
+        throw "missing jQuery selector";
+      }
+      var msg;
+      if (formal) {
+        msg = this.formalgreeting();
+      } else {
+        msg = this.greeting();
+      }
+      $(selector).html(msg);
+      return this;
+    },
   };
 
   Greetr.init = function (firstName, lastName, language) {
@@ -65,6 +82,8 @@
     self.firstName = firstName || "";
     self.lastName = lastName || "";
     self.language = language || "en";
+
+    self.validate();
   };
 
   Greetr.init.prototype = Greetr.prototype;
